@@ -1,11 +1,18 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 
 const PORT = process.env.PORT || 3000;
 
+app.use(cors({
+    origin: 'https://delightful-ocean-0e31ab010.5.azurestaticapps.net'  // Replace with your static web app's URL
+}));
+
 app.get('/', (req,res)=> {
     res.send('Hello, World!');
 });
+
+
 
 app.get('/api/rollDice', (req, res) => {
     const result = Math.floor(Math.random() * 6) + 1;
