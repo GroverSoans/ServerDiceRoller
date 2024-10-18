@@ -8,9 +8,13 @@ app.use(cors({
     origin: 'https://delightful-ocean-0e31ab010.5.azurestaticapps.net'  // Replace with your static web app's URL
 }));
 
-app.get('/', (req,res)=> {
-    res.send('Hello, World!');
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Serve index.html on the root route
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
+
 
 
 
