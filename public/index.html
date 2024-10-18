@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test Page</title>
+</head>
+<body>
+    <h1>Test Dice Roller API</h1>
+
+    <form id="apiTestForm">
+        <label for="dice">Number of dice:</label>
+        <input type="number" id="dice" name="dice" min="1" value="1">
+        <button type="submit">Roll Dice</button>
+    </form>
+
+    <h3>Result:</h3>
+    <p id="result">No result yet.</p>
+
+    <script>
+        document.getElementById('apiTestForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const dice = document.getElementById('dice').value;
+            const apiUrl = `/api/roll-dice?dice=${dice}`;
+
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+                document.getElementById('result').textContent = 'Rolls: ' + data.rolls.join(', ');
+            } catch (error) {
+                document.getElementById('result').textContent = 'Error fetching API: ' + error;
+            }
+        });
+    </script>
+</body>
+</html>
