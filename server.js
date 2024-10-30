@@ -6,17 +6,12 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(cors({
-    origin: 'https://delightful-ocean-0e31ab010.5.azurestaticapps.net'  // Replace with your static web app's URL
+    origin: true
 }));
 
 
-// Serve index.html on the root route
-app.use(express.static(path.join(__dirname, 'public')));
 
-// Serve index.html on the root route
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.get('/api/rollDice', (req, res) => {
